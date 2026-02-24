@@ -13,8 +13,8 @@
 
 		for (i = 0; i < 8; i++)
 			{
-			putchar(str[i]);
+			_putchar(str[i]);
 			}
-		putchar('\n');
+		_putchar('\n');
 		return (0);
 	}
