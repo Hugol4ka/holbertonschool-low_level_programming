@@ -17,6 +17,6 @@ int print_last_digit(int n)
 		{
 		last = last * -1;
 		}
-			putchar(last + '0'); /*le (c+'0') permet d'eviter d'avoir la valeur ASCII*/
+			_putchar(last + '0'); /*le (c+'0') permet d'eviter d'avoir la valeur ASCII*/
 			return (last);
 	}
