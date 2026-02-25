@@ -2,8 +2,8 @@
 
 /**
  * print_sign - checks for number positive or negative
- * @c: the character to be checked
- *
+ * @n: the character to be checked
+ * int n for variable number.
  * Return: '+' if c is a positiv, else if return '-' if return 0
  */
 
