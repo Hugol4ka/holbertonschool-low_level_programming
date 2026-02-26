@@ -1,8 +1,10 @@
 #include"main.h"
 /**
  * int add
- *Display - a+b
+ *@a : 1 int
+ *@b : 2 int
  *
+ * Return: result
  */
 
 int add(int a, int b)
