@@ -19,11 +19,11 @@ int l, s, d;
 	{
 		for (l = 1; l <= size; l++)
 		{
-		for (s = 0; s < (size - l); s++)
+			for (s = 0; s < (size - l); s++)
 			{
 				_putchar(' ');
 			}
-		for (d = 0; d < l; d++)
+			for (d = 0; d < l; d++)
 			{
 				_putchar('#');
 			}
