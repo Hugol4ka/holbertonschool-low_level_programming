@@ -15,16 +15,17 @@ void rev_string(char *s)
 
 	while (s[id] != '\0')
 	{
-	id++;
+		id++;
 	}
 	id--;
+
 	while (i < id)
 	{
-	temp = s[i];
-	s[i] = s[id];
-	s[id] = temp;
-	i++;
-	id--;
+		temp = s[i];
+		s[i] = s[id];
+		s[id] = temp;
+		i++;
+		id--;
 	}
 
 }
