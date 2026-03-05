@@ -27,12 +27,12 @@ unsigned int _strspn(char *s, char *accept)
 				}
 				j++;
 			}
-		}
 			if (equal == 0)
 			{
 				return (i);
 			}
-		i++;
-		equal = 0;
+			i++;
+			equal = 0;
+		}
 	return (i);
 }
