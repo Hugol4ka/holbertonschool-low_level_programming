@@ -13,8 +13,8 @@
 void print_diagsums(int *a, int size)
 {
 	long i;
-	int sum01;
-	int sum02;
+	int sum01 = 0;
+	int sum02 = 0;
 
 	for (i = 0; i < size; i++)
 	{
