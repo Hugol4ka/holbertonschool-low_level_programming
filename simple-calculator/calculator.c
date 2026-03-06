@@ -26,7 +26,7 @@ scanf("%f", &op2);
 					result = op1 * op2;
 				else if (choix == 4)
 				{
-					if (op1 && op2 == 0)
+					if (op2 == 0)
 					{
 						printf("Erreur: division par zero impossible\n");
 						return;
@@ -39,7 +39,7 @@ scanf("%f", &op2);
 				}
 				else if (choix == 5)
 				{
-					if (op1 && op2 == 0)
+					if (op2 == 0)
 					{
 					printf("Erreur: modulo par zero impossible\n");
 					return;
@@ -61,7 +61,7 @@ scanf("%f", &op2);
 int main(void)
 
 {
-	int choix;
+	int choix = -1;
 
 		while (choix != 0)
 			{
