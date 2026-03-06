@@ -65,12 +65,12 @@ int main(void)
 
 		while (choix != 0)
 			{
-			printf("1. Addition\n");
-			printf("2. Soustration\n");
-			printf("3. Multiplication\n");
-			printf("4. Division\n");
-			printf("5. Modulo\n");
-			printf("0. Quitter\n");
+			printf("\t1. Addition\n");
+			printf("\t2. Soustration\n");
+			printf("\t3. Multiplication\n");
+			printf("\t4. Division\n");
+			printf("\t5. Modulo\n");
+			printf("\t0. Quitter\n");
 			printf("Merci d'entrer le chiffre correspondant a l'opération voulu :\n");
 			scanf("%d", &choix);
 				if (choix >= 1 && choix <= 5)
@@ -79,7 +79,7 @@ int main(void)
 				}
 				else if (choix != 0)
 				{
-				printf("Merci de rentrer un chiffre entre 0 et 5\n");
+				printf("Choix invalide, merci de rentrer un chiffre entre 0 et 5\n");
 				}
 			}
 	printf("Aurevoir.");
