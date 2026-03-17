@@ -26,26 +26,29 @@ void print_all(const char * const format, ...)
 		{
 			switch (format[i])
 			{
-				case 'c':
+			case 'c':
 				printf("%s%c", sep, va_arg(bag, int));
 				break;
-				case 'i':
+			case 'i':
 				printf("%s%d", sep, va_arg(bag, int));
 				break;
-				case 'f':
+			case 'f':
 				printf("%s%f", sep, va_arg(bag, double));
 				break;
-				case 's':
+			case 's':
 				str = va_arg(bag, char *);
 				if (str == NULL)
 				str = "(nil)";
 				printf("%s%s", sep, str);
 				break;
+					default:
+					i++;
+					continue;
 			}
 			i++;
 			sep = ", ";
 		}
-		va_end(bag);
-		printf("\n");
 	}
+	va_end(bag);
+	printf("\n");
 }
