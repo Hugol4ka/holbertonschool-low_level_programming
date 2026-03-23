@@ -19,3 +19,9 @@ Ici l'IA nous dit "Le programme a besoin de plus de mémoire".
 ### la bonne analyse / crash_example.c
 Non, ce n'est pas un manque de mémoire, c'est un accès interdit. 
 Même avec 100 Go de RAM, écrire à l'adresse 0 fera toujours crasher le programme.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+## Analyse d'une IA / alaiasing_example.c
+Type d'erreur : Utilisation d'un pointeur après libération.  
+Ayant aucun free(b), le pointeur b est encore valide.
+### la bonne analyse / alaiasing_example.c
+C'est une erreur de logique. free libère le contenu à l'adresse, pas le nom de la variable. Comme a et b partagent la même adresse, "tuer" l'un revient à "tuer" l'autre.
