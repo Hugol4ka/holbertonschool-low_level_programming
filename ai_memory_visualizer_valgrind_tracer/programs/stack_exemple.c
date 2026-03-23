@@ -33,5 +33,5 @@ int main(void)
 {
 	printf("stack_example: recursion and stack frames\n");
 	walk_stack(0, 3);
-	return 0;
+	return (0);
 }
