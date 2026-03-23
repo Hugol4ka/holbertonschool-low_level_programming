@@ -6,9 +6,9 @@ Ce rapport documente l'analyse des comportements mémoire de différents program
 
 ## 1. Heap Analysis (`heap_example.c`)
 
-> **🤖 Analyse de l'IA :** > "Le programme est correct. La fonction `person_free_partial` utilise `free(p)`, ce qui libère la structure Person allouée sur le Tas. Il n'y a donc pas de fuite de mémoire."
+> ** Analyse de l'IA :** > "Le programme est correct. La fonction `person_free_partial` utilise `free(p)`, ce qui libère la structure Person allouée sur le Tas. Il n'y a donc pas de fuite de mémoire."
 
-### 🔬 La bonne analyse
+###  La bonne analyse
 L'IA commet une erreur classique de **shallow free** (libération superficielle). 
 * **Preuve Valgrind :** L'outil indique `definitely lost: 6 bytes in 1 blocks`. 
 * **Explication :** La structure `Person` contient un pointeur interne `name` alloué dynamiquement. En libérant `p` sans libérer `p->name` au préalable, l'adresse de la chaîne "Alice" est perdue. 
