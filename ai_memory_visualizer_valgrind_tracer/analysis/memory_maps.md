@@ -55,3 +55,6 @@ C'est une erreur de logique sur la nature des pointeurs.
 * **Erreur :** Use-after-free (détecté par le compilateur via `-Werror=use-after-free`).
 * **Explication :** `a` et `b` sont des **alias** : ils stockent la même adresse mémoire. 
 * **Conséquence :** `free` libère le *contenu* de l'adresse, pas le nom de la variable. Une fois la mémoire libérée via `a`, le pointeur `b` devient un **Dangling Pointer** (suspendu) pointant vers une zone désormais invalide.
+
+
+---
