@@ -10,6 +10,7 @@
 
 **Critique de l'IA**
 >Erreur IA : L'IA a affirmé que free(p) était suffisant car "le programme libère la structure allouée".
+
 >Ma Correction : C'est une erreur de Shallow Free. L'IA ignore la hiérarchie mémoire. Libérer p détruit le Bloc A, mais le Bloc B ("Alice") reste alloué sans que personne n'ait plus son adresse. C'est une fuite de mémoire (Memory Leak) par perte de propriété (lost ownership).
 
 ## 2. Stack Analysis (stack_example.c)
@@ -22,6 +23,7 @@ Lifetime (Durée de vie) : La variable str a une durée de vie automatique. Elle
 
 **Critique de l'IA**
 >Erreur IA : L'IA a prétendu que le code était "sûr" car il s'exécute sans erreur Valgrind.
+
 >Ma Correction : L'IA confond succès d'exécution et validité mémoire. Le fait que "Hello" s'affiche est une coïncidence (la zone mémoire n'a pas encore été écrasée). C'est un Undefined Behavior critique que l'IA n'a pas su détecter.
 
 ## 3. Aliasing Analysis (aliasing_example.c)
@@ -34,6 +36,7 @@ Heap : Un seul bloc de 10 octets alloué via malloc.
 
 **Critique de l'IA**
 >Erreur IA : L'IA a suggéré que b restait valide après free(a) car "on n'a pas libéré b".
+
 >Ma Correction : L'IA ne comprend pas la différence entre le pointeur (le nom) et la donnée (l'adresse). free libère la zone mémoire à l'adresse donnée. Une fois la zone libérée via a, le pointeur b devient invalide. L'utiliser provoque un Use-after-free.
 
 ---
@@ -46,6 +49,7 @@ Heap : Un seul bloc de 10 octets alloué via malloc.
 
 **Critique de l'IA**
 >Erreur IA : L'IA a émis l'hypothèse d'un manque de mémoire RAM pour expliquer le crash.
+
 >Ma Correction : Diagnostic totalement hors-sujet. Un Segmentation Fault sur un pointeur NULL est un événement déterministe lié aux droits d'accès. Peu importe la RAM disponible, le MMU (Memory Management Unit) bloquera toujours l'accès à l'adresse 0x0.
 
 ---
