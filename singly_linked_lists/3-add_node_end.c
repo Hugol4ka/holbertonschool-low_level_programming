@@ -16,33 +16,30 @@ list_t *add_node_end(list_t **head, const char *str)
 	list_t *temp;
 	unsigned int length = 0;
 
-	/* 1. Calcul de la longueur de la chaîne */
 	while (str && str[length])
 		length++;
 
-	/* 2. Allocation de la mémoire pour le nouveau nœud */
 	new_node = malloc(sizeof(list_t));
 	if (new_node == NULL)
 		return (NULL);
 
-	/* 3. Initialisation du nouveau nœud */
 	new_node->str = strdup(str);
-	if (new_node->str == NULL) /* Sécurité si strdup échoue */
+	if (new_node->str == NULL)
 	{
 		free(new_node);
 		return (NULL);
 	}
 	new_node->len = length;
-	new_node->next = NULL; /* Il sera le dernier, donc pointe vers NULL */
+	new_node->next = NULL;
 
-	/* 4. Cas spécial : la liste est vide */
+
 	if (*head == NULL)
 	{
 		*head = new_node;
 		return (new_node);
 	}
 
-	/* 5. Parcours de la liste a la rechrche du dernier nœud */
+	/* Parcours de la liste a la recherche du dernier nœud */
 	temp = *head;
 	while (temp->next != NULL)
 	{
