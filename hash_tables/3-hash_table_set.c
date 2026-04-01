@@ -2,57 +2,56 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * hash_table_set - Adds or updates an element in a hash table.
+ * @ht: A pointer to the hash table.
+ * @key: The key to add (cannot be an empty string).
+ * @value: The value associated with the key.
+ *
+ * Return: 1 if success, 0 otherwise.
+ */
+
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-    unsigned long int index;
-    hash_node_t *tmp, *new_node;
+	unsigned long int index;
+	hash_node_t *tmp, *new;
+	char *val_copy;
 
-    /* 1. Sécurité */
-    if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
-        return (0);
-
-    /* 2. Trouver l'index */
-    index = key_index((const unsigned char *)key, ht->size);
-
-    /* 3. UPDATE : Si la clé existe déjà */
-    tmp = ht->array[index];
-    while (tmp != NULL)
-    {
-        if (strcmp(tmp->key, key) == 0)
-        {
-            free(tmp->value);
-            tmp->value = strdup(value);
-            if (tmp->value == NULL)
-                return (0);
-            return (1); /* On s'arrête ici si on a mis à jour */
-        }
-        tmp = tmp->next;
-    }
-
-    /*CRÉATION : Si la clé n'existe pas encore */
-    new_node = malloc(sizeof(hash_node_t));
-    if (new_node == NULL)
-        return (0);
-
-    new_node->key = strdup(key);
-    if (new_node->key == NULL)
-    {
-        free(new_node);
-        return (0);
-    }
-
-    new_node->value = strdup(value);
-    if (new_node->value == NULL)
-    {
-        free(new_node->key);
-        free(new_node);
-        return (0);
-    }
-
-    /* On ajoute au début de la liste */
-    new_node->next = ht->array[index];
-    ht->array[index] = new_node;
-
-    return (1);
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+		return (0);
+	val_copy = strdup(value);
+	if (val_copy == NULL)
+		return (0);
+	index = key_index((const unsigned char *)key, ht->size);
+	tmp = ht->array[index];
+	/*Vérifier si la clé existe déjà pour la mettre à jour */
+	while (tmp)
+	{
+		if (strcmp(tmp->key, key) == 0)
+		{
+			free(tmp->value);
+			tmp->value = val_copy;
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	/* Créer un nouveau nœud si la clé n'existe pas */
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
+	{
+		free(val_copy);
+		return (0);
+	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(val_copy);
+		free(new);
+		return (0);
+	}
+	new->value = val_copy; /*Ajouter le nouveau nœud au DEBUT de la liste */
+	new->next = ht->array[index];
+	ht->array[index] = new;
+	return (1);
 }
 
