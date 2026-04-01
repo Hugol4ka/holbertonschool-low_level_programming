@@ -16,22 +16,25 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 	if (head == NULL || *head == NULL)
 	return (-1);
 
-	*head = temp->next;
-	if (*head != NULL)
-		(*head)->prev = NULL;
-
-	free(temp);
-	return (1);
-
+	/*On veut supprimer le premier wagon */
+	if (index == 0)
+	{
+		*head = temp->next;
+		if (*head != NULL)
+			(*head)->prev = NULL;
+		free(temp);
+		return (1);
+	}
+	/*On cherche le wagon plus loin (index > 0)*/
 	while (i < index && temp != NULL)
 	{
 		temp = temp->next;
 		i++;
 	}
-
+	/* Si on a parcouru tout le train sans trouver l'index */
 	if (temp == NULL)
 		return (-1);
-
+	/* On débranche le wagon temp */
 	temp->prev->next = temp->next;
 	if (temp->next != NULL)
 	temp->next->prev = temp->prev;
