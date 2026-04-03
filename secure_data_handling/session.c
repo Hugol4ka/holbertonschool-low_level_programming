@@ -10,13 +10,22 @@ session_t *session_create(const char *id, unsigned int uid, const unsigned char 
 	if (!s)
 		return NULL;
 
-	s->id = (char *)id;
+    /* Allouer la structure */
+	s->id = (char *)malloc(strlen(id) + 1);
+    if (!s->id)
+    {
+        free(s); /* Nettoyage si l'allocation de l'ID échoue */
+        return (NULL);
+    }
+    strcpy(s->id, id);
 
 	s->uid = uid;
 
-	if (data_len > 0) {
+	if (data_len > 0 && data != NULL) {
 		s->data = (unsigned char *)malloc(data_len);
 		if (!s->data) {
+            free(s->id);
+            free(s);
 			return NULL;
 		}
 		memcpy(s->data, data, data_len);
@@ -36,21 +45,19 @@ int session_set_data(session_t *s, const unsigned char *data, size_t data_len)
 	if (!s)
 		return 0;
 
-	if (data_len == 0) {
+	if (data_len == 0 || data == NULL) {
 		free(s->data);
 		s->data = NULL;
 		s->data_len = 0;
 		return 1;
 	}
 
-	tmp = (unsigned char *)realloc(s->data, data_len);
+	tmp = realloc(s->data, data_len);
+    if (!tmp) {
+        return (0);
+    }
+
 	s->data = tmp;
-
-	if (!s->data) {
-		s->data_len = 0;
-		return 0;
-	}
-
 	memcpy(s->data, data, data_len);
 	s->data_len = data_len;
 	return 1;
@@ -62,7 +69,6 @@ void session_destroy(session_t *s)
 		return;
 
 	free(s->id);
-
-	free(s->data);
+    free(s->data);
 	free(s);
 }
