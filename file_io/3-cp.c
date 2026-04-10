@@ -18,12 +18,14 @@ int main(int ac, char **av)
 
 	/* 1. Vérification du nombre d'arguments */
 	if (ac != 3)
+	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
+	}
 	/* 2. Ouverture de la source */
 	fd_from = open(av[1], O_RDONLY);
 	if (fd_from == -1)
-	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 		exit(98);
 	/* 3. Ouverture/Création de la destination (0664 = rw-rw-r--) */
 	fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
